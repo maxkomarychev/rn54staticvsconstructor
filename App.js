@@ -24,7 +24,7 @@ export default class App extends Component<Props> {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("derived called");
+    console.log("derived called", prevState);
     if (prevState) {
       return {
         value: `${prevState.value}, World!`
@@ -36,10 +36,17 @@ export default class App extends Component<Props> {
     const { value } = this.state;
     return (
       <View style={styles.container}>
+        <Text style={styles.instructions}>
+          If `prevState` is null then you will see 'Hello'
+        </Text>
+        <Text style={styles.instructions}>
+          If `prevState` is non null then you will see 'Hello, World!'
+        </Text>
         <Text style={styles.welcome}>{value}</Text>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <Text style={styles.instructions}>
+          Enable console too to see how many times `getDerivedStateFromProps`
+          was called
+        </Text>
       </View>
     );
   }
